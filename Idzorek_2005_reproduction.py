@@ -49,7 +49,6 @@ conf3 = 0.65
 P=np.array([P1,P2,P3])
 Q=np.array([Q1,Q2,Q3]);
 
-#%%
 # Apply the views with simple Omega
 Omega = np.dot(np.dot(P,tauV),P.T)
 
@@ -61,7 +60,6 @@ res = res.altblacklitterman()
 d = display(tau, P, Q, Omega, 'Simple Omega',assets,res)
 d.display()
 
-#%%
 # Now apply the views using the Idzorek's method
 tauV = tau * V
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
