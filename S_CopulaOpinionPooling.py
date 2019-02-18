@@ -50,18 +50,20 @@ data = data.loc[(data.index >= t_first) &(data.index <= t_last)]
 # remove the stocks with missing values
 data = data.dropna(axis=1, how='any')
 data = np.array(data.iloc[:, :n_])
+# compounded return
+data = np.diff(np.log(data), axis=0)  
 
 # Copula Opinion Pooling Input
 
 P_mat = np.array([[0,  -1,  0,    0, 1, 0],
-              [0 ,-0.5, 1, -0.5, 0, 0]]);
-mu_v = np.array([0.0006,0.0007]);
-sigma_v = np.array([0.05,0.075]);
+              [0 ,-0.5, 1, -0.5, 0, 0]]); # views
+mu_v = np.array([0.0006,0.0007]);         # normal view mean 
+sigma_v = np.array([0.05,0.075]);         # normal view sigma
 range_v = np.array([[ 0, 0.001],
-                    [0, 0.0005]]);
-k_ = P_mat.shape[0]  # number of views
-Conf_full = ones((k_, 1)) - 1e-6  # full confidence levels
-Conf = ones((k_, 1))*0.25  # half confidence levels
+                    [0, 0.0005]]);        # uniform view range 
+k_ = P_mat.shape[0]                       # number of views
+Conf_full = ones((k_, 1)) - 1e-6          # full confidence levels
+Conf = ones((k_, 1))*0.25                 # half confidence levels
 
 # Market Information fit and simulation
 
@@ -89,7 +91,6 @@ print('-------------------------------------------------\n')
 df_sigvec = pd.DataFrame(data=gc_sigvec)
 print('Sigvec_{}'.format(name))
 print (df_sigvec.T.round(4))
-
 
 # Market Prior from Student T Copula Simulation
 #MPrior = Z.T

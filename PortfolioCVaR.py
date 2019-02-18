@@ -14,7 +14,7 @@ from scipy.optimize import linprog
 
 
 class PortfolioCVaR(object):
-    """The base class for PortfolioCVaR."""
+    """ The base class for PortfolioCVaR."""
     
     def __init__(self, data, NumPorts, quantile):
         self.data = data
@@ -22,47 +22,34 @@ class PortfolioCVaR(object):
         self.quantile = quantile
   
     def objfCVaR(self, beta, q, N):
-        """ *****************************************************************
-        # Computes vector c of the linear objective function f(x) = c'*x of the
-        # C-VaR Optimization problem 
-        # see: Uryasev, Rockafellar: Optimization of Conditional Value-at-Risk
-        # (1999)
-        # *****************************************************************
-        # Input:
-        #--------------------------------------------------------------------------
-        # beta -> confidence level
-        # q -> number of random vectors X1,...,Xq
-        # N -> nr of elements in vector Xi, i=1,...,q
-        #
-        # Output:
-        #--------------------------------------------------------------------------
-        # cvec -> vector c of linear objective function f(x) = c'*x
-        # *************************************************************************
+        """Computes vector c of the linear objective function f(x) = c'*x of the
+         C-VaR Optimization problem 
+         see: Uryasev, Rockafellar: Optimization of Conditional Value-at-Risk
+         (1999)
+         Input:
+         beta -> confidence level
+         q -> number of random vectors X1,...,Xq
+         N -> nr of elements in vector Xi, i=1,...,q
+         Output:
+         cvec -> vector c of linear objective function f(x) = c'*x
         """
         cvec = r_[1, zeros((N)), 1/(1-beta)*1/q*ones((q))];
         return cvec
 
     def constCVaR(self, Sample,mu,Rstar):
-        """ *************************************************************************
-        # Computes linear constrainst A*x <= b, Aeq*x = beq, lb <= x <= ub of the
-        # C-VaR Optimization problem 
-        # see: Uryasev, Rockafellar: Optimization of Conditional Value-at-Risk
-        # (1999)
-        # *************************************************************************
-        # Input:
-        #--------------------------------------------------------------------------
-        # Sample -> matrix of realizations of random variables X1,...,Xn
-        # mu -> vector of first moments of random variables X1,...,Xn
-        #
-        # Output:
-        #--------------------------------------------------------------------------
-        # A -> matrix on the lefthanside of inequality constraints A*x <= b
-        # b -> vector on the righthanside of inequality constraints A*x <= b
-        # Aeq -> matrix on the lefthanside of equality constraints Aeq*x = beq
-        # beq -> vector on the righthanside of equality constraints Aeq*x = beq
-        # lb -> vector of lower bounds lb <= x
-        # ub -> vector of upper bounds x <= ub
-        # *************************************************************************
+        """Computes linear constrainst A*x <= b, Aeq*x = beq, lb <= x <= ub of the
+         C-VaR Optimization problem see: Uryasev, Rockafellar: Optimization of 
+         Conditional Value-at-Risk (1999)
+         Input:
+         Sample -> matrix of realizations of random variables X1,...,Xn
+         mu -> vector of first moments of random variables X1,...,Xn
+         Output:
+         A -> matrix on the lefthanside of inequality constraints A*x <= b
+         b -> vector on the righthanside of inequality constraints A*x <= b
+         Aeq -> matrix on the lefthanside of equality constraints Aeq*x = beq
+         beq -> vector on the righthanside of equality constraints Aeq*x = beq
+         lb -> vector of lower bounds lb <= x
+         ub -> vector of upper bounds x <= ub
         """
         [q,N] = Sample.shape;       
         A = zeros((q,1+N+q));
@@ -82,10 +69,9 @@ class PortfolioCVaR(object):
 
     def CVaROpt_nonNormal(self):
     
-        """-----------------------------------------------------------------------
-        # This script demonstrates the use of function LINPROG on the basis of
-        # the C-VaR portfolio optimization problen given in:
-        # Uryasev, Rockafellar: Optimization of Conditional Value-at-Risk(1999)
+        """This script demonstrates the use of function LINPROG on the basis of
+         the C-VaR portfolio optimization problen given in:
+         Uryasev, Rockafellar: Optimization of Conditional Value-at-Risk(1999)
         """
         # M: number of samples
         # N: number of assets
