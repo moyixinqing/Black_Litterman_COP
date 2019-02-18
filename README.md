@@ -60,3 +60,4 @@ Source Code:
 [S_CopulaOpinionPooling.py](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/S_CopulaOpinionPooling.py) <br/>
 
 
+Reference: [Meucci_2006.pdf](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/reference/Meucci_2006.pdf)
