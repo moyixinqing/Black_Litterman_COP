@@ -1,4 +1,4 @@
-# Black_Litterman
+# Black_Litterman_Asset_Allocation
 
 ## Features ##
 - [Numpy](http://www.numpy.org) 
@@ -61,6 +61,9 @@ Source Code:
 
 
 Reference: [Meucci_2006.pdf](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/reference/Meucci_2006.pdf)
+
+Cdf of steepening view
+![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/Cdf_of_the_steepening_view.png)
 
 Mean_CVaR Frontier
 ![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/Mean-CVaR_Frontier.png)
