@@ -59,8 +59,8 @@ P_mat = np.array([[0,  -1,  0,    0, 1, 0],
               [0 ,-0.5, 1, -0.5, 0, 0]]); # views
 mu_v = np.array([0.0006,0.0007]);         # normal view mean 
 sigma_v = np.array([0.05,0.075]);         # normal view sigma
-range_v = np.array([[ 0, 0.001],
-                    [0, 0.0005]]);        # uniform view range 
+range_v = np.array([[ 0, 0.01],
+                    [0, 0.02]]);        # uniform view range 
 k_ = P_mat.shape[0]                       # number of views
 Conf_full = ones((k_, 1)) - 1e-6          # full confidence levels
 Conf = ones((k_, 1))*0.25                 # half confidence levels
@@ -111,7 +111,7 @@ MPost = post.Uniform_View(range_v)
 print('Uniform View')
 Utility.disp_stat([MPrior, MPost], ['Prior','Post'])
 post.Plot_cdf(range_v, 'Cdf of the steepening view')
-
+#%%
 # Construct Portfolio
 
 # Mean_CVaR Portfolio Optimization
