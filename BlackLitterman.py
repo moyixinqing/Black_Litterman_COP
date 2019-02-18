@@ -1,20 +1,21 @@
 import numpy as np
+import pandas as pd
 from math import sqrt
 from scipy import linalg
 from collections import namedtuple
 
 class Blacklitterman(object):
     """The base class for Black Litterman."""
-    
+
     def __init__(self,delta, weq, sigma, tau, P, Q, Omega):
         self.delta = delta
         self.weq = weq
         self.sigma = sigma
-        self.tau= tau 
+        self.tau= tau
         self.P = P
         self.Q = Q
         self.Omega = Omega
-        
+
     def blacklitterman(self):
       """ This function performs the Black-Litterman blending of the prior
         and the views into a new posterior estimate of the returns as
@@ -56,18 +57,16 @@ class Blacklitterman(object):
       # We solve for lambda from formula (17) page 7, rather than formula (18)
       # just because it is less to type, and we've already computed w*.
       lmbda = np.dot(linalg.pinv(self.P).T,(w.T * (1 + self.tau) - self.weq).T)
-      
       change=(w[:,0]-self.weq/(1+self.tau));
       for i in range(len(change)):
             if abs(change [i]) < 1e-10:
                 change[i] = 0;
-                
       return [er, w, lmbda, change]
-    
+
 
     def altblacklitterman(self):
         """
-        alternative Black-Litterman 
+        alternative Black-Litterman
         """
         # Reverse optimize and back out the equilibrium returns
         # This is formula (12) page 6.
@@ -86,9 +85,8 @@ class Blacklitterman(object):
         # We solve for lambda from formula (17) page 7, rather than formula (18)
         # just because it is less to type, and we've already computed w*.
         lmbda = np.dot(linalg.pinv(self.P).T,(w.T * (1 + self.tau) - self.weq).T)
-       
         return [er, w, lmbda]
-    
+
     def bl_omega(self, conf, P, Sigma):
         """ Idzorek_omega
         This function computes the Black-Litterman parameters Omega from
@@ -127,7 +125,7 @@ class Blacklitterman(object):
         #// Reverse optimize and back out the equilibrium returns
         #// This is formula (12) page 6.
         pi = np.dot(self.weq, self.sigma) * self.delta;
-        
+
         #// We use tau * sigma many places so just compute it once
         ts = self.tau * self.sigma;
         #// Compute posterior estimate of the mean
@@ -135,10 +133,10 @@ class Blacklitterman(object):
         pi = np.expand_dims(pi ,axis=0)
         P = np.expand_dims(self.P.T,axis=0)
         er = pi.T + np.dot(ts , P.T) * linalg.inv(np.dot(np.dot(P, ts),P.T) + self.Omega) * (self.Q - np.dot(P , pi.T));
-        
+
         #// Compute posterior weights based on uncertainty in mean
         w = (np.dot(er.T , linalg.inv(self.delta * self.sigma))).T;
-        
+
         res = namedtuple('res', ['er', 'w', 'delta', 'weq','V', 'tau', 'P', 'Q', 'Omega'])
         res.er = er
         res.w = w
@@ -149,19 +147,19 @@ class Blacklitterman(object):
         res.Q = self.Q
         res.Omega = self.Omega
         return res
-      
+
 class display(Blacklitterman):
-    
+
     def __init__(self, tau, P, Q, Omega, title, assets, res):
         self.tau = tau
         self.P = P
         self.Q = Q
         self.Omega = Omega
-        
+
         self.title = title
         self.assets = assets
         self.res = res
-        
+
     def display(self):
       """
        Function to display the results of a black-litterman shrinkage
@@ -184,7 +182,7 @@ class display(Blacklitterman):
         line = '{0}\t'.format(x)
         for j in range(len(self.P.T[i])):
             line = line + '{0:.1f}\t'.format(100*self.P.T[i][j])
-    
+
         line = line + '{0:.3f}\t{1:.3f}'.format(100*er[i][0],100*w[i][0])
         print(line)
         i = i + 1
@@ -205,14 +203,12 @@ class display(Blacklitterman):
       for l in lmbda:
         line = line + '{0:.5f}\t'.format(l[0])
         i = i + 1
-      print(line)    
-    
+      print(line)
+
     def disp (self):
-        
-        import pandas as pd
         line = ['Country']
         for p in range(len(self.P)):
-            line = line + ['P{}'.format(p)]      
+            line = line + ['P{}'.format(p)]
         columns = line + ['mu','w*','w*-weq/(1+tau)']
         self.result = pd.DataFrame(columns= columns)
         self.result ['Country'] = np.array(self.assets)
@@ -246,14 +242,13 @@ class display(Blacklitterman):
             i = i + 1
         print(line)
         print('------------------------------------------------------------------\n')
-        
+
     def disppd(self, hPi, pi):
         print(self.title)
         weq = self.res.weq
         V  = self.res.V
         Er = self.res.er
-        
-        import pandas as pd
+
         columns = ['Asset Name', 'Mkt Port (%)','Mean (%)','Std Dev (%)','BL Mean(%)','BL + View  Mean (%)', 'Investor Views'];
         result = pd.DataFrame(columns = columns)
         result['Asset Name'] = np.array(self.assets)
@@ -266,4 +261,3 @@ class display(Blacklitterman):
         result = result.set_index('Asset Name')
         print(result.round(1).to_string())
         print('\n')
-   
