@@ -32,14 +32,11 @@ class Blacklitterman(object):
         self.Omega = Omega
         
     def blacklitterman(self):
-      """
-      This function performs the Black-Litterman blending of the prior
-      and the views into a new posterior estimate of the returns as
-      described in the paper by He and Litterman.
-      """
+
       # Reverse optimize and back out the equilibrium returns
-      # This is formula (2) page 3.
+      # This is formula (12) page 6.
       pi = self.weq.dot(self.sigma * self.delta)
+      #print(pi)
       # We use tau * sigma many places so just compute it once
       ts = self.tau * self.sigma
       # Compute posterior estimate of the mean
@@ -57,7 +54,7 @@ class Blacklitterman(object):
       # Compute lambda value
       # We solve for lambda from formula (17) page 7, rather than formula (18)
       # just because it is less to type, and we've already computed w*.
-      lmbda = np.dot(linalg.inv(self.P).T,(w.T * (1 + self.tau) - self.weq).T)
+      lmbda = np.dot(linalg.pinv(self.P).T,(w.T * (1 + self.tau) - self.weq).T)
       
       change=(w[:,0]-self.weq/(1+self.tau));
       for i in range(len(change)):
@@ -65,6 +62,7 @@ class Blacklitterman(object):
                 change[i] = 0;
                 
       return [er, w, lmbda, change]
+    
 
     def altblacklitterman(self):
         """
@@ -162,23 +160,24 @@ class display(Blacklitterman):
         i = i + 1
       print(line)    
     
-    def disp (self, name,assets, res):
+    def disp (self):
+        
         import pandas as pd
         line = ['Country']
         for p in range(len(self.P)):
             line = line + ['P{}'.format(p)]      
         columns = line + ['mu','w*','w*-weq/(1+tau)']
-        result = pd.DataFrame(columns= columns)
-        result ['Country'] = np.array(assets)
-        result = result.set_index('Country')
+        self.result = pd.DataFrame(columns= columns)
+        self.result ['Country'] = np.array(self.assets)
+        self.result = self.result.set_index('Country')
         for p in range(len(self.P)):
-            result ['P{}'.format(p)] = np.array(self.P[p])*100
-        result ['mu'] = np.array(res[-4])*100
-        result ['w*'] = np.array(res[-3])*100
-        result ['w*-weq/(1+tau)'] = np.array(res[-1])*100
-        print(name)
+            self.result ['P{}'.format(p)] = np.array(self.P[p])*100
+        self.result ['mu'] = np.array(self.res[-4])*100
+        self.result ['w*'] = np.array(self.res[-3])*100
+        self.result ['w*-weq/(1+tau)'] = np.array(self.res[-1])*100
+        print(self.title)
         print('------------------------------------------------------------------')
-        print(result.round(1))
+        print(self.result.round(1))
         print('------------------------------------------------------------------')
         line = 'q\t\t'
         i = 0
@@ -194,7 +193,7 @@ class display(Blacklitterman):
         print(line)
         line = 'lambda\t\t'
         i = 0
-        lmbda = res[-2]
+        lmbda = self.res[-2]
         for l in lmbda:
             line = line + '{0:.3f}\t'.format(l[0])
             i = i + 1
