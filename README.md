@@ -6,7 +6,7 @@
 
 ## Sections ##
 ### 1. He_Litterman_1999_reproduction ###
-Source Code: [He_Litterman_1999_reproduction](https://github.com/moyixinqing/Black_Litterman/tree/master/He_Litterman_1999_reproduction) <br/>
+Source Code: [He_Litterman_1999_reproduction](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/He_Litterman_1999_reproduction.py) <br/>
 
 Reference: [He and Litterman (1999).pdf](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/reference/He_Litterman_1999.pdf)
 
