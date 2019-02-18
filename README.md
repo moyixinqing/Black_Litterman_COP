@@ -54,3 +54,9 @@ Reference: [Meucci 2005.pdf](https://github.com/moyixinqing/Black_Litterman_Exam
 ![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/prior_frontier.png)
 
 ![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/BL_MV_frontier.png)
+
+### 5. CopulaOpinionPooling ###
+Source Code: 
+[S_CopulaOpinionPooling.py](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/S_CopulaOpinionPooling.py) <br/>
+
+
