@@ -27,10 +27,8 @@ class EfficientFrontier(object):
         ExpectedValues = ExpValRets
         EstimatedCovariance = CovRets
         """
-        #%%
         NumAssets = self.EstimatedCovariance.shape[1];
         
-        #%%
         # determine return of minimum-risk portfolio
         FirstDegree=np.zeros((NumAssets,1));
         SecondDegree = self.EstimatedCovariance;
@@ -52,15 +50,12 @@ class EfficientFrontier(object):
         #MinVol_Weights = quadprog(SecondDegree,FirstDegree,A,b,Aeq,beq,[],[],x0);
         MinVol_Return = np.dot(MinVol_Weights,self.ExpectedValues);
         
-        #%%
         # determine return of maximum-return portfolio
         MaxRet_Return = max(self.ExpectedValues);
         
-        #%%
         # slice efficient frontier in NumPortf equally thick horizontal sectors in the upper branch only
         TargetReturns=MinVol_Return + np.arange(self.NumPortf).T*(MaxRet_Return-MinVol_Return)/(self.NumPortf-1);
         
-        #%%
         # compute the NumPortf compositions and risk-return coordinates
         Composition = [];
         Volatility=[];
@@ -102,8 +97,7 @@ class EfficientFrontier(object):
             Composition.append((Weights[0]).tolist());
             Volatility=np.append(Volatility, sqrt(np.dot(np.dot(Weights,self.EstimatedCovariance),Weights.T)));
             ExpectedReturn=np.append(ExpectedReturn, TargetReturns[0][i]);
-        Composition= np.array(Composition)
-        #%%    
+        Composition= np.array(Composition)  
         return [ExpectedReturn,Volatility, Composition] 
     
     

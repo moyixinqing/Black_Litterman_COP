@@ -18,11 +18,15 @@ Created on Fri Jan  4 14:13:28 2019
 
 import numpy as np
 from numpy import ones
+import pandas as pd
+
+from copulas.multivariate.gaussian import GaussianMultivariate
+
 from COP import COP
 from Utility import Utility
 from Estimation import Estimation
-from copulas.multivariate.gaussian import GaussianMultivariate
-import pandas as pd
+from PortfolioCVaR import PortfolioCVaR
+
 
 # Input parameters
 
@@ -105,3 +109,19 @@ post = COP(MPrior, Conf, P_mat)
 MPost = post.Uniform_View(range_v)
 print('Uniform View')
 Utility.disp_stat([MPrior, MPost], ['Prior','Post'])
+
+# Construct Portfolio
+
+#Mean_CVaR Portfolio Optimization
+
+NPort = 49
+quantile = 0.97
+
+port = PortfolioCVaR(data, NPort, quantile)
+[weights,Rstar,CVaR] = port.CVaROpt_nonNormal()
+#Plot
+port.plot(CVaR,Rstar,'Mean-CVaR Frontier')
+p_=np.argmin(CVaR)
+pi_=np.argmax(CVaR[p_:]>0)+p_+1
+port.PlotCVaRFrontier(weights[:,pi_:].T,CVaR[pi_:],'Weights of Mean-CVaR Efficient Portfolio')
+
