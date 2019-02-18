@@ -7,11 +7,13 @@ Created on Mon Jan  7 15:13:27 2019
 
 import numpy as np
 from numpy import r_, ones, zeros,eye, Inf
-    
 import matplotlib.pyplot as plt
 plt.style.use('seaborn')
 from scipy.optimize import linprog
+from scipy.stats import uniform
+from scipy import interpolate
 
+from Utility import Utility
 
 class PortfolioCVaR(object):
     """ The base class for PortfolioCVaR."""
@@ -118,8 +120,8 @@ class PortfolioCVaR(object):
         plt.grid(True)
         plt.xlabel(r'$\beta$ -CVaR')
         plt.ylabel(r'$\mu$')
-        plt.gca().set_yticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_yticks()])
-        plt.gca().set_xticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_xticks()]) 
+        plt.gca().set_yticklabels(['{:.2f}%'.format(x*100) for x in plt.gca().get_yticks()])
+        plt.gca().set_xticklabels(['{:.2f}%'.format(x*100) for x in plt.gca().get_xticks()]) 
         plt.show()
     
     def PlotCVaRFrontier(self, Portfolios,CVarvec,name):
@@ -144,4 +146,3 @@ class PortfolioCVaR(object):
         plt.title(name)
         plt.show()
       
-

@@ -51,7 +51,7 @@ data = data.loc[(data.index >= t_first) &(data.index <= t_last)]
 data = data.dropna(axis=1, how='any')
 data = np.array(data.iloc[:, :n_])
 # compounded return
-data = np.diff(np.log(data), axis=0)  
+data = np.diff(np.log(data), axis=0)   
 
 # Copula Opinion Pooling Input
 
@@ -93,7 +93,7 @@ print('Sigvec_{}'.format(name))
 print (df_sigvec.T.round(4))
 
 # Market Prior from Student T Copula Simulation
-#MPrior = Z.T
+# MPrior = Z.T
 
 # Copula Opinion View 
 
@@ -110,16 +110,17 @@ post = COP(MPrior, Conf, P_mat)
 MPost = post.Uniform_View(range_v)
 print('Uniform View')
 Utility.disp_stat([MPrior, MPost], ['Prior','Post'])
+post.Plot_cdf(range_v, 'Cdf of the steepening view')
 
 # Construct Portfolio
 
-#Mean_CVaR Portfolio Optimization
+# Mean_CVaR Portfolio Optimization
 
-NPort = 49
+NPort = 50
 quantile = 0.97
-
 port = PortfolioCVaR(data, NPort, quantile)
 [weights,Rstar,CVaR] = port.CVaROpt_nonNormal()
+
 #Plot
 port.plot(CVaR,Rstar,'Mean-CVaR Frontier')
 p_=np.argmin(CVaR)
