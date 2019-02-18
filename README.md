@@ -41,3 +41,16 @@ Michaud et al (2013) Table 1
 | Data Std Deviation    | 16.82 |
 | View Posterior Return | 4.47  |
 | View Effect on Return | 5.96  |
+
+### 4. Meucci_2005 ###
+Source Code: [Meucci_2005_Estentions.py](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Meucci_2005_Extensions.py) <br/>
+
+Reference: [Meucci 2005.pdf](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/reference/Meucci%20(2005a).pdf)<br/>
+
+![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/Efficient_Frontier.png)
+
+![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/true_frontier.png)
+
+![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/prior_frontier.png)
+
+![alt text](https://github.com/moyixinqing/Black_Litterman_Example/blob/master/Images/BL_MV_frontier.png)
