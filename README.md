@@ -1,4 +1,4 @@
-# Black_Litterman
+# Black_Litterman_Asset_Allocation
 
 ## Features ##
 - [Numpy](http://www.numpy.org) 
