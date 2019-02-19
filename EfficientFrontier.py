@@ -99,8 +99,7 @@ class EfficientFrontier(object):
             ExpectedReturn=np.append(ExpectedReturn, TargetReturns[0][i]);
         Composition= np.array(Composition)  
         return [ExpectedReturn,Volatility, Composition] 
-    
-    
+       
     def PlotFrontier(self,Portfolios,name):
 
         [xx,N]=Portfolios.shape;

@@ -17,24 +17,36 @@ class Blacklitterman(object):
         self.Omega = Omega
 
     def blacklitterman(self):
-      """ This function performs the Black-Litterman blending of the prior
+        """This function performs the Black-Litterman blending of the prior
         and the views into a new posterior estimate of the returns as
         described in the paper by He and Litterman.
+        
+        Parameters
         ----------
-         Inputs
-           delta  - Risk tolerance from the equilibrium portfolio
-           weq    - Weights of the assets in the equilibrium portfolio
-           sigma  - Prior covariance matrix
-           tau    - Coefficiet of uncertainty in the prior estimate of the mean (pi)
-           P      - Pick matrix for the view(s)
-           Q      - Vector of view returns
-           Omega  - Matrix of variance of the views (diagonal)
-        Outputs
-           Er     - Posterior estimate of the mean returns
-           w      - Unconstrained weights computed given the Posterior estimates
-                of the mean and covariance of returns.
-           lambda - A measure of the impact of each view on the posterior estimates.
-      """
+        delta :
+            Risk tolerance from the equilibrium portfolio
+        weq :
+            Weights of the assets in the equilibrium portfolio
+        sigma :
+            Prior covariance matrix
+        tau :
+            Coefficiet of uncertainty in the prior estimate of the mean
+        P :
+            Pick matrix for the view
+        Q :
+            Vector of view returns
+        Omega :
+            Matrix of variance of the views
+        
+        Returns
+        -------
+        type
+            Er     - Posterior estimate of the mean returns
+            w      - Unconstrained weights computed given the Posterior estimates
+            of the mean and covariance of returns.
+            lambda - A measure of the impact of each view on the posterior estimates.
+        
+        """
       # Reverse optimize and back out the equilibrium returns
       # This is formula (12) page 6.
       pi = self.weq.dot(self.sigma * self.delta)
@@ -76,7 +88,6 @@ class Blacklitterman(object):
       res.Omega = self.Omega
       return res     
     
-
     def altblacklitterman(self):
         """
         alternative Black-Litterman
@@ -111,18 +122,17 @@ class Blacklitterman(object):
         res.Q = self.Q
         res.Omega = self.Omega
         return res        
-        
-        
+                
     def bl_omega(self, conf, P, Sigma):
         """ Idzorek_omega
         This function computes the Black-Litterman parameters Omega from
            an Idzorek confidence.
-        ----------
-         Inputs
+
+         Parameters
            conf   - Idzorek confidence specified as a decimal (50% as 0.50)
            P      - Pick matrix for the view
            Sigma  - Prior covariance matrix
-         Outputs
+         Returns
            omega  - Black-Litterman uncertainty/confidence parameter
         """
         alpha = (1 - conf) / conf
@@ -133,8 +143,8 @@ class Blacklitterman(object):
         """This function performs the Black-Litterman blending of the prior
         and the views into a new posterior estimate of the returns as
         described in the various papers by Meucci.
-        ----------
-         Inputs
+
+         Parameters
            delta- Risk tolerance from the equilibrium portfolio
            weq- Weights of the assets in the equilibrium portfolio
            sigma- Prior covariance matrix
@@ -142,7 +152,7 @@ class Blacklitterman(object):
            P- Pick matrix for the view(s)
            Q- Vector of view returns
            Omega- Matrix of variance of the views (diagonal)
-         Outputs
+         Returns
            Er - Posterior estimate of the mean returns
            w- Unconstrained weights computed given the Posterior estimates
               of the mean and covariance of returns.
@@ -190,7 +200,7 @@ class display(Blacklitterman):
     def display(self):
       """
        Function to display the results of a black-litterman shrinkage
-       Inputs
+       Parameters
            title    - Displayed at top of output
            assets    - List of self.assets
            res        - List of results structures from the bl function
