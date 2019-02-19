@@ -57,7 +57,7 @@ res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.altblacklitterman()
 
 # Display table
-d = display(tau, P, Q, Omega, 'Simple Omega',assets,res)
+d = display('Simple Omega',assets,res)
 d.display()
 
 # Now apply the views using the Idzorek's method
@@ -73,6 +73,6 @@ res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.altblacklitterman()
 
 # Display table
-d = display(tau, P, Q, Omega, 'Idzorek Method',assets,res)
+d = display('Idzorek Method',assets,res)
 d.display()
 

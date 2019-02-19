@@ -59,7 +59,7 @@ res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.Meuccibl()
 
 # Display table
-d = display(tau, P, Q, Omega, 'Michaud et al (2013) Table 1',assets,res)
+d = display('Michaud et al (2013) Table 1',assets,res)
 d.disppd(hPi, pi)
 Er = res.er
 w=res.w
@@ -82,7 +82,7 @@ Omega = [0.05 * 0.05];
 res = res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.Meuccibl()
 # Display table
-d = display(tau, P, Q, Omega, 'Michaud et al (2013) Table 2',assets,res)
+d = display('Michaud et al (2013) Table 2',assets,res)
 d.disppd(hPi, pi)
 w1=w1.reshape((8,))
 Er1=Er1.reshape((8,))

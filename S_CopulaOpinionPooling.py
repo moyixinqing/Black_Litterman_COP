@@ -79,7 +79,6 @@ name = 'True'
 print('Mean_{}'.format(name))
 mean= np.expand_dims(data.mean(axis=0), axis=0).T
 print(data.mean(axis=0).round(2))
-
 print('-------------------------------------------------\n')
 df_cov = pd.DataFrame(data=gc.covariance)
 gc_corr = Estimation.cov_2_corr(gc.covariance)[0]
@@ -93,7 +92,7 @@ print('Sigvec_{}'.format(name))
 print (df_sigvec.T.round(4))
 
 # Market Prior from Student T Copula Simulation
-# MPrior = Z.T
+# MPrior = Z.T   #generated from Total Return Generator
 
 # Copula Opinion View 
 

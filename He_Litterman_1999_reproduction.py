@@ -46,7 +46,7 @@ Q=np.array([Q1]);
 Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.blacklitterman()
-d = display(tau, P, Q, Omega, 'Table 4: View 1 (He & Litterman 1999)',assets,res)
+d = display('Table 4: View 1 (He & Litterman 1999)',assets,res)
 d.disp()
 #%%
 # Define view 2
@@ -60,7 +60,7 @@ Q=np.array([Q1,Q2]);
 Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.blacklitterman()
-d = display(tau, P, Q, Omega, 'Table 5: View 1 & 2 (He & Litterman 1999)', assets, res)
+d = display('Table 5: View 1 & 2 (He & Litterman 1999)', assets, res)
 d.disp()
 #%%
 # Define view 3
@@ -75,7 +75,7 @@ Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.blacklitterman()
-d = display(tau, P, Q, Omega, 'Table 6: View 1 + 2, View 2 more bullish (He & Litterman 1999)', assets, res)
+d = display('Table 6: View 1 + 2, View 2 more bullish (He & Litterman 1999)', assets, res)
 d.disp()
 #%%
 # Define view 4
@@ -90,7 +90,7 @@ Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 Omega[0,0]=2*Omega[0,0];
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.blacklitterman()
-d = display(tau, P, Q, Omega, 'Table 7: View 1 & 2, View 1 less confident (He & Litterman 1999)', assets, res)
+d = display('Table 7: View 1 & 2, View 1 less confident (He & Litterman 1999)', assets, res)
 d.disp()
 #%%
 # Define view 5
@@ -104,5 +104,5 @@ Omega = np.dot(np.dot(P,tauV),P.T) * np.eye(Q.shape[0])
 Omega[0,0]=2*Omega[0,0];
 res = Blacklitterman(delta, weq, V, tau, P, Q, Omega)
 res = res.blacklitterman()
-d = display(tau, P, Q, Omega, 'Table 8: View 1, 2 & 3, View 1 less confident (He & Litterman 1999)', assets, res)
+d = display('Table 8: View 1, 2 & 3, View 1 less confident (He & Litterman 1999)', assets, res)
 d.disp()

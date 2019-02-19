@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
-from math import sqrt
 from scipy import linalg
 from collections import namedtuple
 
 class Blacklitterman(object):
     """The base class for Black Litterman."""
 
-    def __init__(self,delta, weq, sigma, tau, P, Q, Omega):
+    def __init__(self, delta, weq, sigma, tau, P, Q, Omega):
+      
         self.delta = delta
         self.weq = weq
         self.sigma = sigma
@@ -61,8 +61,21 @@ class Blacklitterman(object):
       for i in range(len(change)):
             if abs(change [i]) < 1e-10:
                 change[i] = 0;
-      return [er, w, lmbda, change]
-
+      
+      res = namedtuple('res', ['er', 'w', 'lmbda', 'change', 'delta', 'weq','V', 'tau', 'P', 'Q', 'Omega'])
+      res.er = er
+      res.w = w
+      res.lmbda = lmbda
+      res.change = change
+      res.delta = self.delta
+      res.V = self.sigma
+      res.weq = self.weq
+      res.tau = self.tau
+      res.P = self.P
+      res.Q = self.Q
+      res.Omega = self.Omega
+      return res     
+    
 
     def altblacklitterman(self):
         """
@@ -85,8 +98,21 @@ class Blacklitterman(object):
         # We solve for lambda from formula (17) page 7, rather than formula (18)
         # just because it is less to type, and we've already computed w*.
         lmbda = np.dot(linalg.pinv(self.P).T,(w.T * (1 + self.tau) - self.weq).T)
-        return [er, w, lmbda]
-
+        
+        res = namedtuple('res', ['er', 'w', 'lmbda', 'delta', 'weq','V', 'tau', 'P', 'Q', 'Omega'])
+        res.er = er
+        res.w = w
+        res.lmbda =lmbda
+        res.delta = self.delta
+        res.V = self.sigma
+        res.weq = self.weq
+        res.tau = self.tau
+        res.P = self.P
+        res.Q = self.Q
+        res.Omega = self.Omega
+        return res        
+        
+        
     def bl_omega(self, conf, P, Sigma):
         """ Idzorek_omega
         This function computes the Black-Litterman parameters Omega from
@@ -143,6 +169,7 @@ class Blacklitterman(object):
         res.delta = self.delta
         res.V = self.sigma
         res.weq = self.weq
+        res.tau = self.tau
         res.P = self.P
         res.Q = self.Q
         res.Omega = self.Omega
@@ -150,16 +177,16 @@ class Blacklitterman(object):
 
 class display(Blacklitterman):
 
-    def __init__(self, tau, P, Q, Omega, title, assets, res):
-        self.tau = tau
-        self.P = P
-        self.Q = Q
-        self.Omega = Omega
-
+    def __init__(self, title, assets, res):
+        self.tau = res.tau
+        self.P = res.P
+        self.Q = res.Q
+        self.Omega = res.Omega
+        
         self.title = title
         self.assets = assets
         self.res = res
-
+  
     def display(self):
       """
        Function to display the results of a black-litterman shrinkage
@@ -168,9 +195,10 @@ class display(Blacklitterman):
            assets    - List of self.assets
            res        - List of results structures from the bl function
       """
-      er = self.res[0]
-      w = self.res[1]
-      lmbda = self.res[2]
+      er = self.res.er
+      w = self.res.w
+      lmbda = self.res.lmbda
+      
       print('\n' + self.title)
       line = 'Country\t\t'
       for p in range(len(self.P)):
@@ -215,9 +243,9 @@ class display(Blacklitterman):
         self.result = self.result.set_index('Country')
         for p in range(len(self.P)):
             self.result ['P{}'.format(p)] = np.array(self.P[p])*100
-        self.result ['mu'] = np.array(self.res[-4])*100
-        self.result ['w*'] = np.array(self.res[-3])*100
-        self.result ['w*-weq/(1+tau)'] = np.array(self.res[-1])*100
+        self.result ['mu'] = np.array(self.res.er)*100
+        self.result ['w*'] = np.array(self.res.w)*100
+        self.result ['w*-weq/(1+tau)'] = np.array(self.res.change)*100
         print(self.title)
         print('------------------------------------------------------------------')
         print(self.result.round(1))
@@ -236,7 +264,7 @@ class display(Blacklitterman):
         print(line)
         line = 'lambda\t\t'
         i = 0
-        lmbda = self.res[-2]
+        lmbda = self.res.lmbda
         for l in lmbda:
             line = line + '{0:.3f}\t'.format(l[0])
             i = i + 1

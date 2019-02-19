@@ -5,7 +5,6 @@ Created on Sun Feb 17 21:59:24 2019
 @author: renxi
 """
 import numpy as np
-from copulas.multivariate.gaussian import GaussianMultivariate
 
 class Estimation:
 
@@ -23,8 +22,4 @@ class Estimation:
         c2 = (s2 / s_vol).T / s_vol
         return c2, s_vol
 
-    def fit_Gcopula(data):
-        gc = GaussianMultivariate()
-        gc.fit(data)
-        print(gc)
         
