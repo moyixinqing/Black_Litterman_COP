@@ -3,7 +3,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.linalg import inv
-from EfficientFrontier import EfficientFrontier
+
+from portfolio.EfficientFrontier import EfficientFrontier
 
 N=10;
 MaxVolRets=.4;

@@ -6,8 +6,9 @@ Created on Sat Dec 29 11:15:02 2018
 """
 
 import numpy as np
-from BlackLitterman import Blacklitterman, display
- 
+#from BlackLitterman import Blacklitterman, display
+from blacklitterman.BlackLitterman import Blacklitterman
+from blacklitterman.display import display
 #%%
 # Take the values from He & Litterman, 1999.
 weq = np.array([0.016,0.022,0.052,0.055,0.116,0.124,0.615])

@@ -1,6 +1,8 @@
 import numpy as np
-from BlackLitterman import Blacklitterman, display
- 
+#from BlackLitterman import Blacklitterman, display
+from blacklitterman.BlackLitterman import Blacklitterman
+from blacklitterman.display import display
+
 # Load Data
 # Take the values from Idzorek, 2005.
 weq = np.array([.193400,.261300,.120900,.120900,.013400,.013400,.241800,.034900 ])

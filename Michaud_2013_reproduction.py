@@ -1,7 +1,10 @@
 import numpy as np
 from math import sqrt
 
-from BlackLitterman import Blacklitterman, display
+#from BlackLitterman import Blacklitterman, display
+from blacklitterman.BlackLitterman import Blacklitterman
+from blacklitterman.display import display
+
 
 #// Take the values from the paper
 weq = np.array([0.20, 0.20, 0.06, 0.06, 0.06, 0.06, 0.06, 0.30])

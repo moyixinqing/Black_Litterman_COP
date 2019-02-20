@@ -10,7 +10,7 @@ from copulas.multivariate.gaussian import GaussianMultivariate
 import pandas as pd
 from scipy.stats import skew, kurtosis
 
-from Estimation import Estimation
+from alm.Estimation import Estimation
 
 class Utility:
     """frequrntly used functions"""

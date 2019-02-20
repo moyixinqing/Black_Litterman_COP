@@ -21,11 +21,19 @@ from numpy import ones
 import pandas as pd
 
 from copulas.multivariate.gaussian import GaussianMultivariate
+# =============================================================================
+# 
+# from Utility import Utility
+# from Estimation import Estimation
+# from COP import COP
+# from PortfolioCVaR import PortfolioCVaR
+# 
+# =============================================================================
 
-from COP import COP
-from Utility import Utility
-from Estimation import Estimation
-from PortfolioCVaR import PortfolioCVaR
+from alm.Utility import Utility
+from alm.Estimation import Estimation
+from blacklitterman.COP import COP
+from portfolio.PortfolioCVaR import PortfolioCVaR
 
 
 # Input parameters
@@ -41,7 +49,7 @@ i_2 = 5  # index of second quasi-invariant shown in plot
 
 # Load Data
 
-path = 'C:/Users/renxi/Documents/GitHub/Black_Litterman/databases/global-databases/401k/'
+path = 'C:/Users/renxi/Documents/GitHub/Black_Litterman_Asset_Allocation/databases/global-databases/401k/'
 data = pd.read_csv(path + '401k_Price.csv', index_col=0)
 # set timestamps
 data = data.set_index(pd.to_datetime(data.index))

@@ -1,40 +1,17 @@
 Black\_Litterman\_Asset\_Allocation package
 ===========================================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    Black_Litterman_Asset_Allocation.alm
+    Black_Litterman_Asset_Allocation.blacklitterman
+    Black_Litterman_Asset_Allocation.portfolio
+
 Submodules
 ----------
-
-Black\_Litterman\_Asset\_Allocation.BlackLitterman module
----------------------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.BlackLitterman
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Black\_Litterman\_Asset\_Allocation.COP module
-----------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.COP
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Black\_Litterman\_Asset\_Allocation.EfficientFrontier module
-------------------------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.EfficientFrontier
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Black\_Litterman\_Asset\_Allocation.Estimation module
------------------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.Estimation
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 Black\_Litterman\_Asset\_Allocation.He\_Litterman\_1999\_reproduction module
 ----------------------------------------------------------------------------
@@ -68,26 +45,10 @@ Black\_Litterman\_Asset\_Allocation.Michaud\_2013\_reproduction module
     :undoc-members:
     :show-inheritance:
 
-Black\_Litterman\_Asset\_Allocation.PortfolioCVaR module
---------------------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.PortfolioCVaR
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 Black\_Litterman\_Asset\_Allocation.S\_CopulaOpinionPooling module
 ------------------------------------------------------------------
 
 .. automodule:: Black_Litterman_Asset_Allocation.S_CopulaOpinionPooling
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Black\_Litterman\_Asset\_Allocation.Utility module
---------------------------------------------------
-
-.. automodule:: Black_Litterman_Asset_Allocation.Utility
     :members:
     :undoc-members:
     :show-inheritance:

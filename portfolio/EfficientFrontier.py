@@ -45,21 +45,10 @@ class EfficientFrontier(object):
         x0=1/NumAssets*np.ones((NumAssets,1));
         
         def fun(x):
-            """
 
-            Parameters
-            ----------
-            x :
-                
-
-            Returns
-            -------
-
-            
-            """
-           import numpy as np
            fun= 0.5*np.dot(np.dot(x.T,SecondDegree),x)+np.dot(FirstDegree.T,x)
            return fun
+     
         def con(x):
             """
 
