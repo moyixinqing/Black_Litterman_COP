@@ -23,6 +23,20 @@ class COP:
         self.P_mat = P_mat
 
     def Gassian_View(self, mu_v, sigma_v):
+        """
+
+        Parameters
+        ----------
+        mu_v :
+            
+        sigma_v :
+            
+
+        Returns
+        -------
+
+        
+        """
 
         NSim,_ = self.MPrior.shape; # get NSim
         NViews = self.P_mat.shape[0]; # get NViews
@@ -63,6 +77,18 @@ class COP:
         return MPost 
 
     def Uniform_View(self, range_v):
+        """
+
+        Parameters
+        ----------
+        range_v :
+            
+
+        Returns
+        -------
+
+        
+        """
         
             NSim,_ = self.MPrior.shape; # get NSim
             NViews = self.P_mat.shape[0]; # get NViews
@@ -100,6 +126,20 @@ class COP:
             return MPost 
         
     def Plot_cdf(self, range_v, name):
+        """
+
+        Parameters
+        ----------
+        range_v :
+            
+        name :
+            
+
+        Returns
+        -------
+
+        
+        """
             # Cdf Input
             NSim,_ = self.MPrior.shape; # get NSim
             NViews = self.P_mat.shape[0]; # get NViews

@@ -7,16 +7,21 @@ Created on Sun Feb 17 21:59:24 2019
 import numpy as np
 
 class Estimation:
+    """ """
 
     def cov_2_corr(s2):
         """
-        Inputs
+
+        Parameters
         ----------
-            s2 : array, shape (n_, n_)
-        Outputs
+        s2 : array, shape (n_, n_)
+            
+
+        Returns
         -------
-            c2 : array, shape (n_, n_)
-            s_vol : array, shape (n_,)
+        c2 : array, shape (n_, n_)
+        s_vol : array, shape (n_,)
+        
         """
         s_vol = np.sqrt(np.diag(s2))
         c2 = (s2 / s_vol).T / s_vol

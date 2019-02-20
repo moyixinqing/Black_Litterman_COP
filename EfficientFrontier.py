@@ -20,12 +20,20 @@ class EfficientFrontier(object):
         self.ExpectedValues = ExpectedValues
             
     def EfficientFrontier(self):
-        """ This function returns the NumPortf x 1 vector expected returns, 
-                               the NumPortf x 1 vector of volatilities and 
-                               the NumPortf x NumAssets matrix of compositions 
+        """This function returns the NumPortf x 1 vector expected returns,
+                               the NumPortf x 1 vector of volatilities and
+                               the NumPortf x NumAssets matrix of compositions
          of NumPortf efficient portfolios whos returns are equally spaced along the whole range of the efficient frontier
         ExpectedValues = ExpValRets
         EstimatedCovariance = CovRets
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        
         """
         NumAssets = self.EstimatedCovariance.shape[1];
         
@@ -37,10 +45,34 @@ class EfficientFrontier(object):
         x0=1/NumAssets*np.ones((NumAssets,1));
         
         def fun(x):
+            """
+
+            Parameters
+            ----------
+            x :
+                
+
+            Returns
+            -------
+
+            
+            """
            import numpy as np
            fun= 0.5*np.dot(np.dot(x.T,SecondDegree),x)+np.dot(FirstDegree.T,x)
            return fun
         def con(x):
+            """
+
+            Parameters
+            ----------
+            x :
+                
+
+            Returns
+            -------
+
+            
+            """
             return np.dot(Aeq,x) - beq
         
         cons = ({'type': 'eq','fun': con})
@@ -80,13 +112,49 @@ class EfficientFrontier(object):
             
             #Weights = quadprog(SecondDegree,FirstDegree,A,b,AEq,bEq,[],[],x0).T;
             def fun(x):
+                """
+
+                Parameters
+                ----------
+                x :
+                    
+
+                Returns
+                -------
+
+                
+                """
                 import numpy as np
                 fun= 0.5*np.dot(np.dot(x.T,SecondDegree),x)+np.dot(FirstDegree.T,x)
                 return fun
             def con(x):
+                """
+
+                Parameters
+                ----------
+                x :
+                    
+
+                Returns
+                -------
+
+                
+                """
                 return np.dot(Aeq,x) - beq
         
             def con1(x):
+                """
+
+                Parameters
+                ----------
+                x :
+                    
+
+                Returns
+                -------
+
+                
+                """
                 return np.dot(AEq.T,x) - bEq #np.expand_dims(bEq,axis=0).T 
         
             cons = ({'type': 'eq','fun': con},{'type': 'eq','fun': con1})
@@ -101,6 +169,20 @@ class EfficientFrontier(object):
         return [ExpectedReturn,Volatility, Composition] 
        
     def PlotFrontier(self,Portfolios,name):
+        """
+
+        Parameters
+        ----------
+        Portfolios :
+            
+        name :
+            
+
+        Returns
+        -------
+
+        
+        """
 
         [xx,N]=Portfolios.shape;
         Data=np.cumsum(Portfolios,1);

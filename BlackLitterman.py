@@ -20,7 +20,7 @@ class Blacklitterman(object):
         """This function performs the Black-Litterman blending of the prior
         and the views into a new posterior estimate of the returns as
         described in the paper by He and Litterman.
-        
+
         Parameters
         ----------
         delta :
@@ -37,14 +37,10 @@ class Blacklitterman(object):
             Vector of view returns
         Omega :
             Matrix of variance of the views
-        
+
         Returns
         -------
-        type
-            Er     - Posterior estimate of the mean returns
-            w      - Unconstrained weights computed given the Posterior estimates
-            of the mean and covariance of returns.
-            lambda - A measure of the impact of each view on the posterior estimates.
+
         
         """
       # Reverse optimize and back out the equilibrium returns
@@ -89,9 +85,7 @@ class Blacklitterman(object):
       return res     
     
     def altblacklitterman(self):
-        """
-        alternative Black-Litterman
-        """
+        """alternative Black-Litterman"""
         # Reverse optimize and back out the equilibrium returns
         # This is formula (12) page 6.
         pi = self.weq.dot(self.sigma * self.delta)
@@ -124,16 +118,23 @@ class Blacklitterman(object):
         return res        
                 
     def bl_omega(self, conf, P, Sigma):
-        """ Idzorek_omega
+        """Idzorek_omega
         This function computes the Black-Litterman parameters Omega from
            an Idzorek confidence.
 
-         Parameters
-           conf   - Idzorek confidence specified as a decimal (50% as 0.50)
-           P      - Pick matrix for the view
-           Sigma  - Prior covariance matrix
-         Returns
-           omega  - Black-Litterman uncertainty/confidence parameter
+        Parameters
+        ----------
+        conf :
+            Idzorek confidence specified as a decimal
+        P :
+            Pick matrix for the view
+        Sigma :
+            Prior covariance matrix
+
+        Returns
+        -------
+
+        
         """
         alpha = (1 - conf) / conf
         omega = alpha * np.dot(np.dot(P,Sigma),P.T)
@@ -144,18 +145,27 @@ class Blacklitterman(object):
         and the views into a new posterior estimate of the returns as
         described in the various papers by Meucci.
 
-         Parameters
-           delta- Risk tolerance from the equilibrium portfolio
-           weq- Weights of the assets in the equilibrium portfolio
-           sigma- Prior covariance matrix
-           tau- Coefficiet of uncertainty in the prior estimate of the mean (pi)
-           P- Pick matrix for the view(s)
-           Q- Vector of view returns
-           Omega- Matrix of variance of the views (diagonal)
-         Returns
-           Er - Posterior estimate of the mean returns
-           w- Unconstrained weights computed given the Posterior estimates
-              of the mean and covariance of returns.
+        Parameters
+        ----------
+        delta :
+            Risk tolerance from the equilibrium portfolio
+        weq :
+            Weights of the assets in the equilibrium portfolio
+        sigma :
+            Prior covariance matrix
+        tau :
+            Coefficiet of uncertainty in the prior estimate of the mean
+        P :
+            Pick matrix for the view
+        Q :
+            Vector of view returns
+        Omega :
+            Matrix of variance of the views
+
+        Returns
+        -------
+
+        
         """
 
         #// Reverse optimize and back out the equilibrium returns
@@ -186,6 +196,7 @@ class Blacklitterman(object):
         return res
 
 class display(Blacklitterman):
+    """ """
 
     def __init__(self, title, assets, res):
         self.tau = res.tau
@@ -198,13 +209,22 @@ class display(Blacklitterman):
         self.res = res
   
     def display(self):
-      """
-       Function to display the results of a black-litterman shrinkage
-       Parameters
-           title    - Displayed at top of output
-           assets    - List of self.assets
-           res        - List of results structures from the bl function
-      """
+        """Function to display the results of a black-litterman shrinkage
+
+        Parameters
+        ----------
+        title :
+            Displayed at top of output
+        assets :
+            List of self
+        res :
+            List of results structures from the bl function
+
+        Returns
+        -------
+
+        
+        """
       er = self.res.er
       w = self.res.w
       lmbda = self.res.lmbda
@@ -244,6 +264,7 @@ class display(Blacklitterman):
       print(line)
 
     def disp (self):
+        """ """
         line = ['Country']
         for p in range(len(self.P)):
             line = line + ['P{}'.format(p)]
@@ -282,6 +303,20 @@ class display(Blacklitterman):
         print('------------------------------------------------------------------\n')
 
     def disppd(self, hPi, pi):
+        """
+
+        Parameters
+        ----------
+        hPi :
+            
+        pi :
+            
+
+        Returns
+        -------
+
+        
+        """
         print(self.title)
         weq = self.res.weq
         V  = self.res.V

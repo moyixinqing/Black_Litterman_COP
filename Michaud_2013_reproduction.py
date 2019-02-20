@@ -104,6 +104,22 @@ for i in range(10000):
 t4=np.zeros((n,5));
 from scipy.stats import norm
 def norminv(p,mean,std):
+    """
+
+    Parameters
+    ----------
+    p :
+        
+    mean :
+        
+    std :
+        
+
+    Returns
+    -------
+
+    
+    """
     from scipy.stats import norm
     rv = norm(mean, std).ppf(p)
     return rv

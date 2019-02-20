@@ -13,13 +13,41 @@ from scipy.stats import skew, kurtosis
 from Estimation import Estimation
 
 class Utility:
-    """ frequrntly used functions """
+    """frequrntly used functions"""
     def nullspace(a, rtol=1e-5):
+        """
+
+        Parameters
+        ----------
+        a :
+            
+        rtol :
+            (Default value = 1e-5)
+
+        Returns
+        -------
+
+        
+        """
         u, s, v = svd(a)
         rank = (s > rtol*s[0]).sum()
         return rank, v[rank:].T.copy()
 
     def disp_stat(M, Name):        
+        """
+
+        Parameters
+        ----------
+        M :
+            
+        Name :
+            
+
+        Returns
+        -------
+
+        
+        """
         NInput = len(M)        
         for i in range(NInput):
             data = M[i]
