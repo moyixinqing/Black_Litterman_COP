@@ -39,6 +39,8 @@ tau_hl = 120  # prior half life
 i_1 = 2  # index of first quasi-invariant shown in plot
 i_2 = 5  # index of second quasi-invariant shown in plot
 
+view =  'Uniform' # view disribution
+
 # Load Data
 
 path = 'C:/Users/renxi/Documents/GitHub/Black_Litterman_Asset_Allocation/databases/global-databases/401k/'
@@ -94,22 +96,20 @@ print(df_sigvec.T.round(4))
 # Market Prior from Student T Copula Simulation
 # MPrior = Z.T   #generated from Total Return Generator
 
-# Copula Opinion View
-
-# Gaussian View
-
-post = COP(MPrior, Conf, P_mat)
-MPost = post.Gassian_View(mu_v, sigma_v)
-print('Gaussian View')
-Utility.disp_stat([MPrior, MPost], ['Prior', 'Post'])
-
-# Uniform View
-
-post = COP(MPrior, Conf, P_mat)
-MPost = post.Uniform_View(range_v)
-print('Uniform View')
-Utility.disp_stat([MPrior, MPost], ['Prior', 'Post'])
-post.Plot_cdf(range_v, 'Cdf of the steepening view')
+# Copula Opinion View  
+if view == 'Gaussian':
+    # Gaussian View    
+    post = COP(MPrior, Conf, P_mat)
+    MPost = post.Gassian_View(mu_v, sigma_v)
+    print('Gaussian View')
+    Utility.disp_stat([MPrior, MPost], ['Prior', 'Post'])
+elif view == 'Uniform':    
+    # Uniform View    
+    post = COP(MPrior, Conf, P_mat)
+    MPost = post.Uniform_View(range_v)
+    print('Uniform View')
+    Utility.disp_stat([MPrior, MPost], ['Prior', 'Post'])
+    post.Plot_cdf(range_v, 'Cdf of the steepening view')
 # %%
 # Construct Portfolio
 

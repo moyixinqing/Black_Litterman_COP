@@ -6,11 +6,12 @@ Created on Sun Feb 17 21:42:36 2019
 """
 
 from numpy.linalg import svd
-from copulas.multivariate.gaussian import GaussianMultivariate
+import numpy as np
 import pandas as pd
 from scipy.stats import skew, kurtosis
 
 from alm.Estimation import Estimation
+from alm.Statistics import Statistics
 
 class Utility:
     """frequrntly used functions"""
@@ -61,11 +62,12 @@ class Utility:
             dist ['sigma'] = sigma
             dist ['sk'] = sk
             dist ['ku'] = ku
-            print('{} market statistics _ Gaussian Copula'.format(name))
+            print('{} market statistics'.format(name))
             print(dist.round(2).T.to_string())
-            gc = GaussianMultivariate()
-            gc_prior_res = gc.fit(data)
-            X_corr,_ = Estimation.cov_2_corr(gc.covariance)
+
+            _, covariance = Statistics.FPmeancov(data.T)
+            X_corr,_ = Estimation.cov_2_corr(covariance)
+            
             print('{} correlation'.format(name))
-            print(X_corr)
+            print(np.round(X_corr,4))
             print('\n')
