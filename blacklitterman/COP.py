@@ -184,7 +184,7 @@ class COP:
             plt.plot(W[:,0],F[:,0],'r', label='prior')
             plt.plot(W[:,0],F_hat[:,0], 'g', label= 'view')
             plt.plot(W[:,0],F_tilda[:,0], 'b', label= 'postorier')
-            plt.legend()
+            plt.legend(['prior','view','postorier'])
         
     
     
